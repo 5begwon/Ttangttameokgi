@@ -83,6 +83,7 @@ void MainGame::AddResource()
 	IMG->Add("option_window", "option_window");
 	IMG->Add("howtoplay_window", "howtoplay_window");
 	IMG->Add("invisable", "invisable");
+	IMG->Add("heart", "heart");
 
 	// BG
 	IMG->Add("white", "white");

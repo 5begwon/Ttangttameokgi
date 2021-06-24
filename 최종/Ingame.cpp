@@ -17,7 +17,7 @@ void Ingame::Init()
 
 	OBJ->Add(new Mouse, "Mouse"); // 마우스 오브젝트 생성
 
-	switch (type) // type에 따S른 스테이지 설정
+	switch (type) // type에 따른 스테이지 설정
 	{
 	case 1:
 		Player::coloring_per = 0; // 퍼센트 초기화
@@ -52,13 +52,14 @@ void Ingame::Update()
 		switch (type)
 		{
 		case 1:
-			SCENE->Set("stage2");
+			SCENE->Set("stage1_clear");
 			break;
 		case 2:
-			SCENE->Set("stage3");
+			SCENE->Set("stage2_clear");
 			break;
 		case 3:
-			SCENE->Set("clear");
+			SCENE->Set("stage3_clear");
+			break;
 		}
 	}
 }

@@ -1,7 +1,7 @@
 #include "DXUT.h"
 #include "Player.h"
 
-int Player::cell[CELLSIZE_X][CELLSIZE_Y] = { 0, };
+int	  Player::cell[CELLSIZE_X][CELLSIZE_Y] = { 0, };
 float Player::coloring_per = 0;
 
 void Player::Init()
@@ -12,6 +12,7 @@ void Player::Init()
 	img		 = IMG->Find("player");
 	pause	 = IMG->Find("pause");
 	rb	     = IMG->Find("rainbow");
+	hpimg	 = IMG->Find("heart");
 
 	memset(bg_color, D3DXCOLOR(0, 0, 0, 0), sizeof(bg_color));
 
@@ -30,7 +31,8 @@ void Player::Init()
 	main_col = new Col(this, P);
 	during = TIME->Create(2);
 
-	speed = 5;
+	// 플레이어 스탯
+	speed = 1;
 	rot = 0;
 	hp = 3;
 	def = 0;
@@ -40,9 +42,21 @@ void Player::Init()
 
 void Player::Update()
 {
-	if		(VMGR->stage == 1 && hp == 0) SCENE->Set("fail");
-	else if (VMGR->stage == 2 && hp == 0) SCENE->Set("fail");
-	else if (VMGR->stage == 3 && hp == 0) SCENE->Set("fail");
+	if (VMGR->stage == 1 && hp == 0)
+	{
+		SCENE->Set("stage1_fail");
+		hp = 3;
+	}
+	else if (VMGR->stage == 2 && hp == 0)
+	{
+		SCENE->Set("stage2_fail");
+		hp = 3;
+	}
+	else if (VMGR->stage == 3 && hp == 0)
+	{
+		SCENE->Set("stage3_fail");
+		hp = 3;
+	}
 
 	main_col->Set(pos, 40, 40);
 
@@ -61,7 +75,7 @@ void Player::Update()
 
 	if (INPUT->Press(VK_UP))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale * DT; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
 		{
 			key = KeyState::UP;
 			pos.y--;
@@ -73,7 +87,7 @@ void Player::Update()
 	}
 	else if (INPUT->Press(VK_DOWN))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale * DT; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
 		{
 			key = KeyState::DOWN;
 			pos.y++;
@@ -85,7 +99,7 @@ void Player::Update()
 	}
 	else if (INPUT->Press(VK_LEFT))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale * DT; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
 		{
 			key = KeyState::LEFT;
 			pos.x--;
@@ -97,7 +111,7 @@ void Player::Update()
 	}
 	else if (INPUT->Press(VK_RIGHT))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale* DT; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
 		{
 			key = KeyState::RIGHT;
 			pos.x++;
@@ -108,19 +122,11 @@ void Player::Update()
 		}
 	}
 
-	if (INPUT->Down(VK_SHIFT))
-	{
-		VMGR->time_scale = VMGR->time_scale == 1 ? 0 : 1;
-	}
+	// SHIFT == pause
+	if (INPUT->Down(VK_SHIFT)) VMGR->time_scale = VMGR->time_scale == 1 ? 0 : 1;
 
-	if (VMGR->time_scale == 0)
-	{
-		Pause = true;
-	}
-	if (VMGR->time_scale == 1)
-	{
-		Pause = false;
-	}
+	if (VMGR->time_scale == 0) Pause = true;
+	if (VMGR->time_scale == 1) Pause = false;
 
 	if (INPUT->Down(VK_F1)) HOT->F1();
 	if (INPUT->Down(VK_F2)) HOT->F2();
@@ -128,43 +134,45 @@ void Player::Update()
 	if (INPUT->Down(VK_F4)) HOT->F4();
 	if (INPUT->Down(VK_F5)) HOT->F5();
 	if (INPUT->Down(VK_F6)) HOT->F6();
-
 }
 
 void Player::Render()
 {
-		main_col->Draw();
-		rb->Render({CENTER.x, CENTER.y - 320}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 195));
-		afterbg->Render();
-		beforebg->Render(CENTER, RT_ZERO, ONE, 0, 1, D3DCOLOR_RGBA(255, 255, 255, 255));
-		V2 dir;
-		dir = { 0, -1 };
+	main_col->Draw();
+	rb->Render({CENTER.x, CENTER.y - 320}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 195));
+	afterbg->Render();
+	beforebg->Render(CENTER, RT_ZERO, ONE, 0, 1, D3DCOLOR_RGBA(255, 255, 255, 255));
+	V2 dir;
+	dir = { 0, -1 };
 
-		/* 플레이어 이미지 방향 변환
-		switch (key)
-		{
-			case Player::KeyState::UP: dir = { 0,-1 }; break;
-			case Player::KeyState::DOWN: dir = { 0,1 }; break;
-			case Player::KeyState::LEFT: dir = { -1,0 }; break;
-			case Player::KeyState::RIGHT: dir = { 1,0 }; break;
-		}
-		*/
+	for (int i = 1; i <= hp; i++)
+		hpimg->Render({ ((float)58 * i) + (float)685, (float)190}, RT_ZERO, { 1,1 }, 0, 0.5f);
 
-		img->Render(pos, RT_ZERO, ONE, atan2(dir.x, -dir.y));
+	/* 플레이어 이미지 방향 변환
+	switch (key)
+	{
+		case Player::KeyState::UP: dir = { 0,-1 }; break;
+		case Player::KeyState::DOWN: dir = { 0,1 }; break;
+		case Player::KeyState::LEFT: dir = { -1,0 }; break;
+		case Player::KeyState::RIGHT: dir = { 1,0 }; break;
+	}
+	*/
 
-		char str1[256];
-		sprintf(str1, "%02d%%", (int)coloring_per);
-		IMG->Write(str1, { CENTER.x, CENTER.y - 380 }, 120);
-		sprintf(str1, "hp : %d", hp);
-		IMG->Write(str1, { CENTER.x - 500, CENTER.y - 100 }, 70);
-		sprintf(str1, "speed : %.2f", (double)speed);
-		IMG->Write(str1, { CENTER.x - 500, CENTER.y }, 70);
-		//sprintf(str1, "def : %d", def); 아마도 무기 장착 뜰것같음
-		//IMG->Write(str1, { pos.x - 425 - 15,pos.y - 200 + 160 }, 10);
-		if (Pause == true)
-		{
-			pause->Render(CENTER, RT_ZERO, { 1,1 }, 0, 0);
-		}
+	img->Render(pos, RT_ZERO, ONE, atan2(dir.x, -dir.y));
+
+	char str1[256];
+	sprintf(str1, "%02d%%", (int)coloring_per);
+	IMG->Write(str1, { CENTER.x, CENTER.y - 380 }, 120);
+	//sprintf(str1, "hp : %d", hp);
+	//IMG->Write(str1, { CENTER.x - 500, CENTER.y - 100 }, 70);
+	sprintf(str1, "speed : %.2f", (double)speed);
+	IMG->Write(str1, { CENTER.x - 500, CENTER.y }, 70);
+	//sprintf(str1, "def : %d", def); 아마도 무기 장착 뜰것같음
+	//IMG->Write(str1, { pos.x - 425 - 15,pos.y - 200 + 160 }, 10);
+	
+	// pause 이미지 출력
+	if (Pause == true)
+		pause->Render(CENTER, RT_ZERO, { 1,1 }, 0, 0);
 }
 
 void Player::Release()
@@ -259,7 +267,7 @@ void Player::DrawLine()
 
 	cell[c.x][c.y] = 1;
 
-	pixel[index] = D3DCOLOR_RGBA(255, 0, 0, 255);
+	pixel[index] = D3DCOLOR_RGBA(255, 255, 255, 255);
 
 	beforebg->p->UnlockRect(0);
 }
@@ -396,11 +404,11 @@ int Player::FloodFill(V2 pos, int target, int change)
 void Player::AutoFill()
 {
 	V2 value[4];
-	int isOk[4] = { 0, };
-	value[0] = { -1,-1 };
-	value[1] = { 1,1 };
-	value[2] = { -1,1 };
-	value[3] = { 1,-1 };
+	int isOk[4] = {  0,	   };
+	value[0]	= { -1, -1 };
+	value[1]	= {  1,  1 };
+	value[2]	= { -1,  1 };
+	value[3]	= {  1, -1 };
 
 	for (size_t i = 0; i < 4; i++)
 	{
@@ -440,12 +448,15 @@ bool Player::Near(KeyState dir, int target)
 		case KeyState::UP:
 		return cell[cx][cy - 1] == target;
 		break;
+
 		case KeyState::DOWN:
 		return cell[cx][cy + 1] == target;
 		break;
+
 		case KeyState::LEFT:
 		return cell[cx - 1][cy] == target;
 		break;
+
 		case KeyState::RIGHT:
 		return cell[cx + 1][cy] == target;
 		break;

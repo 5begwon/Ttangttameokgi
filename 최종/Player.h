@@ -12,6 +12,7 @@ public:
     Texture* endbg;
     Texture* pause;
     Texture* rb;
+    Texture* hpimg;
 
     Timer* during;
 
