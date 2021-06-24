@@ -8,7 +8,7 @@ Window::Window(Texture* bg, V2 pos, float w, float h)
 
 	float right = pos.x, top = pos.y + h / 2;
 
-	exit = new Button(IMG->Add("button_cross", "button_cross"), { right, top }, "", 60, 60, 0, [&]()->void { Off(); });
+	exit = new Button(IMG->Find("button_cross"), { right, top }, "", 60, 60, 0, [&]()->void { Off(); });
 	exit->Off();
 
 	OBJ->Add(this, "Window");

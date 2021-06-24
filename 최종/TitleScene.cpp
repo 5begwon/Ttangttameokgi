@@ -12,10 +12,10 @@ void TitleScene::Init()
 	alpha = 255;
 	OBJ->Add(new Mouse, "Mouse");
 
-	white = IMG->Add("white", "white");
-	logo = IMG->Add("logo", "logo");
-	bg = IMG->Add("Main", "Main");
-	select = IMG->Add("stage", "stage");
+	white  = IMG->Find("white");
+	logo   = IMG->Find("logo");
+	bg	   = IMG->Find("Main");
+	select = IMG->Find("stage");
 
 	switch (type)
 	{
@@ -26,7 +26,7 @@ void TitleScene::Init()
 		case 2:
 			howtoplay = new Button
 			(
-				IMG->Add("howto", "howto"),
+				IMG->Find("howto"),
 				{ 291, CENTER.y + 168 },
 				"",
 				326,
@@ -36,7 +36,7 @@ void TitleScene::Init()
 			);
 			start = new Button
 			(
-				IMG->Add("start", "start"),
+				IMG->Find("start"),
 				{ 282, CENTER.y + 245 },
 				"",
 				300,
@@ -46,7 +46,7 @@ void TitleScene::Init()
 			);
 			option = new Button
 			(
-				IMG->Add("option", "option"),
+				IMG->Find("option"),
 				{ 225, CENTER.y + 325 },
 				"",
 				188,
@@ -54,13 +54,13 @@ void TitleScene::Init()
 				1,
 				[&]()->void {option_window->On(); }
 			);
-			option_window = new Window(IMG->Add("option_window", "option_window"), CENTER, 400, 600);
-			howtoplay_window = new Window(IMG->Add("howtoplay_window", "howtoplay_window"), CENTER, 600, 600);
+			option_window	 = new Window(IMG->Find("option_window"), CENTER, 400, 600);
+			howtoplay_window = new Window(IMG->Find("howtoplay_window"), CENTER, 600, 600);
 			break;
 		case 3:
 		stage1 = new Button
 		(
-			IMG->Add("invisable", "invisable"),
+			IMG->Find("invisable"),
 			{ CENTER.x +  200, CENTER.y + 50 },
 			"",
 			120,
@@ -70,7 +70,7 @@ void TitleScene::Init()
 		);
 		stage2 = new Button
 		(
-			IMG->Add("invisable", "invisable"),
+			IMG->Find("invisable"),
 			{ CENTER.x + 200, CENTER.y + 200 },
 			"",
 			120,
@@ -80,7 +80,7 @@ void TitleScene::Init()
 		);
 		stage3 = new Button
 		(
-			IMG->Add("invisable", "invisable"),
+			IMG->Find("invisable"),
 			{ CENTER.x + 200, CENTER.y + 350 },
 			"",
 			120,

@@ -13,7 +13,7 @@ void End::Init()
 	next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "", 440, 200, 1, [&]()->void { SCENE->Set("stage1"); });
 	main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "", 440, 200, 1, [&]()->void { SCENE->Set("Title");  });
 
-	stage1_c = IMG->Add("clear", "clear");
+	stage1_c = IMG->Find("clear");
 }
 
 void End::Update()

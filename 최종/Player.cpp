@@ -7,11 +7,11 @@ float Player::coloring_per = 0;
 void Player::Init()
 {
 	beforebg = IMG->ReLoad("before_bg1");
-	afterbg = IMG->Add("after_bg1", "after_bg1");
-	boss = OBJ->Find("boss");
-	img = IMG->Add("player", "player");
-	pause = IMG->Add("pause", "pause");
-	rb = IMG->Add("rb", "rb");
+	afterbg  = IMG->Find("after_bg1");
+	boss	 = OBJ->Find("boss");
+	img		 = IMG->Find("player");
+	pause	 = IMG->Find("pause");
+	rb	     = IMG->Find("rainbow");
 
 	memset(bg_color, D3DXCOLOR(0, 0, 0, 0), sizeof(bg_color));
 
@@ -40,9 +40,9 @@ void Player::Init()
 
 void Player::Update()
 {
-	if		(VMGR->stage == 1 && hp <= 0) SCENE->Set("fail");
-	else if (VMGR->stage == 2 && hp <= 0) SCENE->Set("fail");
-	else if (VMGR->stage == 3 && hp <= 0) SCENE->Set("fail");
+	if		(VMGR->stage == 1 && hp == 0) SCENE->Set("fail");
+	else if (VMGR->stage == 2 && hp == 0) SCENE->Set("fail");
+	else if (VMGR->stage == 3 && hp == 0) SCENE->Set("fail");
 
 	main_col->Set(pos, 40, 40);
 
@@ -61,7 +61,7 @@ void Player::Update()
 
 	if (INPUT->Press(VK_UP))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale * DT; i++)
 		{
 			key = KeyState::UP;
 			pos.y--;
@@ -73,7 +73,7 @@ void Player::Update()
 	}
 	else if (INPUT->Press(VK_DOWN))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale * DT; i++)
 		{
 			key = KeyState::DOWN;
 			pos.y++;
@@ -85,7 +85,7 @@ void Player::Update()
 	}
 	else if (INPUT->Press(VK_LEFT))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale * DT; i++)
 		{
 			key = KeyState::LEFT;
 			pos.x--;
@@ -97,7 +97,7 @@ void Player::Update()
 	}
 	else if (INPUT->Press(VK_RIGHT))
 	{
-		for (size_t i = 0; i < speed * VMGR->time_scale; i++)
+		for (size_t i = 0; i < speed * VMGR->time_scale* DT; i++)
 		{
 			key = KeyState::RIGHT;
 			pos.x++;
@@ -427,7 +427,7 @@ void Player::AddItem()
 void Player::NoDamage()
 {
 	during->Start();
-	img = IMG->Add("player", "player");
+	img = IMG->Find("player");
 }
 
 bool Player::Near(KeyState dir, int target)

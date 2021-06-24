@@ -11,7 +11,7 @@ void Bullet::Init()
 	switch (type)
 	{
 	case 1:
-		img = IMG->Add("player", "player");
+		img = IMG->Find("player");
 		speed = 2;
 		break;
 	}

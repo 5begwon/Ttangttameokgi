@@ -11,5 +11,6 @@ public:
 	void Release();
 	void Lost();
 	void Reset();
+	void AddResource();
 };
 

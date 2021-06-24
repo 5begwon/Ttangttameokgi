@@ -74,20 +74,20 @@ void Ingame::Render()
 	switch (type)
 	{
 		case 1:
-			tempbg = IMG->Add("before_bg1", "before_bg1");
-			Start = IMG->Add("delayimg", "delayimg");
+			tempbg = IMG->Find("before_bg1");
+			Start  = IMG->Find("delayimg");
 			tempbg->Render();
 			Start->Render();
 		break;
 		case 2:
-			tempbg = IMG->Add("Main", "Main");
-			Start = IMG->Add("delayimg", "delayimg");
+			tempbg = IMG->Find("Main");
+			Start  = IMG->Find("delayimg");
 			tempbg->Render();
 			Start->Render();
 		break;
 		case 3:
-			tempbg = IMG->Add("before_bg1", "before_bg1");
-			Start = IMG->Add("delayimg", "delayimg");
+			tempbg = IMG->Find("before_bg1");
+			Start  = IMG->Find("delayimg");
 			tempbg->Render();
 			Start->Render();
 		break;

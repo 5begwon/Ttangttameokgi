@@ -3,6 +3,10 @@
 
 void MainGame::Init()
 {
+	CAM->Reset();
+
+	AddResource();
+
 	SCENE->Add(new TitleScene(1), "Intro");
 	SCENE->Add(new TitleScene(2), "Title");
 	SCENE->Add(new TitleScene(3), "Stage");
@@ -61,4 +65,31 @@ void MainGame::Lost()
 void MainGame::Reset()
 {
 	IMG->Reset();
+}
+
+void MainGame::AddResource()
+{
+	// OBJ
+	IMG->Add("player", "player");
+
+	// UI
+	IMG->Add("logo", "logo");
+	IMG->Add("rainbow", "rainbow");
+	IMG->Add("pause", "pause");
+	IMG->Add("button_cross", "button_cross");
+	IMG->Add("howto", "howto");
+	IMG->Add("start", "start");
+	IMG->Add("option", "option");
+	IMG->Add("option_window", "option_window");
+	IMG->Add("howtoplay_window", "howtoplay_window");
+	IMG->Add("invisable", "invisable");
+
+	// BG
+	IMG->Add("white", "white");
+	IMG->Add("stage", "stage");
+	IMG->Add("Main", "Main");
+	IMG->Add("after_bg1", "after_bg1");
+	IMG->Add("before_bg1", "before_bg1");
+	IMG->Add("delayimg", "delayimg");
+	IMG->Add("clear", "clear");
 }

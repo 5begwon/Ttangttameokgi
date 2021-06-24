@@ -74,7 +74,7 @@ void Enemy::Init()
 
 void Enemy::Update()
 {
-	for (int i = 0; i < speed * VMGR->time_scale; i++)
+	for (int i = 0; i < speed * VMGR->time_scale * DT; i++)
 	{
 		pos += dir;
 	}
