@@ -6,7 +6,6 @@ class Ingame :
 public:
     Ingame(int type); // int type = 스테이지(정수)
 
-    Texture* bg;
     Texture* tempbg;
     Texture* Start;
 

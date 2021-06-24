@@ -26,7 +26,7 @@ public:
     int alpha;
 
     // 1 : Intro, 2 : Title, 3 : Stage
-    int type;
+    int type = 1;
 
     // Scene을(를) 통해 상속됨
     virtual void Init() override;

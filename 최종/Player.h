@@ -11,6 +11,7 @@ public:
     Texture* afterbg;
     Texture* endbg;
     Texture* pause;
+    Texture* rb;
 
     Timer* during;
 
@@ -31,7 +32,6 @@ public:
 
     static int cell[CELLSIZE_X][CELLSIZE_Y];
     static float coloring_per;
-    static int stage;
 
     D3DXCOLOR bg_color[CELLSIZE_X][CELLSIZE_Y];
 

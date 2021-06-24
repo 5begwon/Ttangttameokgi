@@ -24,39 +24,39 @@ void TitleScene::Init()
 			wait->Start();
 			break;
 		case 2:
-		howtoplay = new Button
-		(
-			IMG->Add("howto", "howto"),
-			{ 291, CENTER.y + 168 },
-			"",
-			326,
-			52,
-			1,
-			[&]()->void { howtoplay_window->On(); }
-		);
-		start = new Button
-		(
-			IMG->Add("start", "start"),
-			{ 282, CENTER.y + 245 },
-			"",
-			300,
-			52,
-			1,
-			[&]()->void {SCENE->Set("Stage"); }
-		);
-		option = new Button
-		(
-			IMG->Add("option", "option"),
-			{ 225, CENTER.y + 325 },
-			"",
-			188,
-			52,
-			1,
-			[&]()->void {option_window->On(); }
-		);
-		option_window = new Window(IMG->Add("option_window", "option_window"), CENTER, 400, 600);
-		howtoplay_window = new Window(IMG->Add("howtoplay_window", "howtoplay_window"), CENTER, 600, 600);
-		break;
+			howtoplay = new Button
+			(
+				IMG->Add("howto", "howto"),
+				{ 291, CENTER.y + 168 },
+				"",
+				326,
+				52,
+				1,
+				[&]()->void { howtoplay_window->On(); }
+			);
+			start = new Button
+			(
+				IMG->Add("start", "start"),
+				{ 282, CENTER.y + 245 },
+				"",
+				300,
+				52,
+				1,
+				[&]()->void {SCENE->Set("Stage"); }
+			);
+			option = new Button
+			(
+				IMG->Add("option", "option"),
+				{ 225, CENTER.y + 325 },
+				"",
+				188,
+				52,
+				1,
+				[&]()->void {option_window->On(); }
+			);
+			option_window = new Window(IMG->Add("option_window", "option_window"), CENTER, 400, 600);
+			howtoplay_window = new Window(IMG->Add("howtoplay_window", "howtoplay_window"), CENTER, 600, 600);
+			break;
 		case 3:
 		stage1 = new Button
 		(
@@ -66,7 +66,7 @@ void TitleScene::Init()
 			120,
 			120,
 			1,
-			[&]()->void { SCENE->Set("stage1"); }
+			[&]()->void { SCENE->Set("stage1"), VMGR->stage = 1; }
 		);
 		stage2 = new Button
 		(
@@ -76,7 +76,7 @@ void TitleScene::Init()
 			120,
 			120,
 			1,
-			[&]()->void { SCENE->Set("stage2"); }
+			[&]()->void { SCENE->Set("stage2"), VMGR->stage = 2; }
 		);
 		stage3 = new Button
 		(
@@ -86,7 +86,7 @@ void TitleScene::Init()
 			120,
 			120,
 			1,
-			[&]()->void { SCENE->Set("stage3"); }
+			[&]()->void { SCENE->Set("stage3"), VMGR->stage = 3; }
 		);
 		break;
 	}

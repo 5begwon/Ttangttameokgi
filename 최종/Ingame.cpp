@@ -4,34 +4,35 @@
 extern int score; // 다른 파일에서 score를 받아온다.
 
 Ingame::Ingame(int type)
-	:bg(), type(type) // 초기화
+	: type(type) // 초기화
 {
 }
 
 void Ingame::Init()
 {
+	type = VMGR->stage;
+
 	if (!isReady)
 		return;
 
 	OBJ->Add(new Mouse, "Mouse"); // 마우스 오브젝트 생성
 
-	switch (type) // type에 따른 스테이지 설정
+	switch (type) // type에 따S른 스테이지 설정
 	{
 	case 1:
-		Player::stage = 1;
 		Player::coloring_per = 0; // 퍼센트 초기화
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER; // 보스 생성
 		enemy_count = 3;
 		score = 0; // 점수 초기화
 		break;
 	case 2:
-		Player::stage = 2;
+		VMGR->stage = 2;
 		Player::coloring_per = 0;
 		enemy_count = 5;
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
 		break;
 	case 3:
-		Player::stage = 3;
+		VMGR->stage = 3;
 		Player::coloring_per = 0;
 		enemy_count = 10;
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
@@ -73,13 +74,23 @@ void Ingame::Render()
 	switch (type)
 	{
 		case 1:
-		tempbg = IMG->Add("before_bg1", "before_bg1");
-		tempbg->Render();
-
-		Start = IMG->Add("delayimg", "delayimg");
-		Start->Render();
+			tempbg = IMG->Add("before_bg1", "before_bg1");
+			Start = IMG->Add("delayimg", "delayimg");
+			tempbg->Render();
+			Start->Render();
 		break;
-		
+		case 2:
+			tempbg = IMG->Add("Main", "Main");
+			Start = IMG->Add("delayimg", "delayimg");
+			tempbg->Render();
+			Start->Render();
+		break;
+		case 3:
+			tempbg = IMG->Add("before_bg1", "before_bg1");
+			Start = IMG->Add("delayimg", "delayimg");
+			tempbg->Render();
+			Start->Render();
+		break;
 	}
 }
 

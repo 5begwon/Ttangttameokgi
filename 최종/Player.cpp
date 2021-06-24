@@ -3,15 +3,15 @@
 
 int Player::cell[CELLSIZE_X][CELLSIZE_Y] = { 0, };
 float Player::coloring_per = 0;
-int Player::stage = 1;
 
 void Player::Init()
 {
-	boss = OBJ->Find("boss");
 	beforebg = IMG->ReLoad("before_bg1");
 	afterbg = IMG->Add("after_bg1", "after_bg1");
+	boss = OBJ->Find("boss");
 	img = IMG->Add("player", "player");
 	pause = IMG->Add("pause", "pause");
+	rb = IMG->Add("rb", "rb");
 
 	memset(bg_color, D3DXCOLOR(0, 0, 0, 0), sizeof(bg_color));
 
@@ -30,20 +30,19 @@ void Player::Init()
 	main_col = new Col(this, P);
 	during = TIME->Create(2);
 
-	speed = 3;
+	speed = 5;
 	rot = 0;
-	hp = 5;
+	hp = 3;
 	def = 0;
 	draw_mode = false;
 	no_damage = false;
-	stage = 1;
 }
 
 void Player::Update()
 {
-	if		(stage == 1 && hp <= 0) SCENE->Set("fail");
-	else if (stage == 2 && hp <= 0) SCENE->Set("fail");
-	else if (stage == 3 && hp <= 0) SCENE->Set("fail");
+	if		(VMGR->stage == 1 && hp <= 0) SCENE->Set("fail");
+	else if (VMGR->stage == 2 && hp <= 0) SCENE->Set("fail");
+	else if (VMGR->stage == 3 && hp <= 0) SCENE->Set("fail");
 
 	main_col->Set(pos, 40, 40);
 
@@ -135,9 +134,9 @@ void Player::Update()
 void Player::Render()
 {
 		main_col->Draw();
+		rb->Render({CENTER.x, CENTER.y - 320}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 195));
 		afterbg->Render();
 		beforebg->Render(CENTER, RT_ZERO, ONE, 0, 1, D3DCOLOR_RGBA(255, 255, 255, 255));
-
 		V2 dir;
 		dir = { 0, -1 };
 
@@ -154,8 +153,8 @@ void Player::Render()
 		img->Render(pos, RT_ZERO, ONE, atan2(dir.x, -dir.y));
 
 		char str1[256];
-		sprintf(str1, "%d%%", (int)coloring_per);
-		IMG->Write(str1, { CENTER.x - 500, CENTER.y - 200 }, 70);
+		sprintf(str1, "%02d%%", (int)coloring_per);
+		IMG->Write(str1, { CENTER.x, CENTER.y - 380 }, 120);
 		sprintf(str1, "hp : %d", hp);
 		IMG->Write(str1, { CENTER.x - 500, CENTER.y - 100 }, 70);
 		sprintf(str1, "speed : %.2f", (double)speed);
