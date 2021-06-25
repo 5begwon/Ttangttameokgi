@@ -4,6 +4,7 @@
 Title::Title(int type)
 	:bg(), map(), type(type)
 {
+	CAM->Reset();
 }
 
 void Title::Init()

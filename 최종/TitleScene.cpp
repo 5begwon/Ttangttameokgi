@@ -8,7 +8,6 @@ TitleScene::TitleScene(int type)
 
 void TitleScene::Init()
 {
-	CAM->pos = CENTER;
 	alpha = 255;
 	OBJ->Add(new Mouse, "Mouse");
 

@@ -42,20 +42,21 @@ void Player::Init()
 
 void Player::Update()
 {
-	if (VMGR->stage == 1 && hp == 0)
+	if (VMGR->stage == 1 && hp <= 0)
 	{
+		hp = 3;
 		SCENE->Set("stage1_fail");
-		hp = 3;
+		
 	}
-	else if (VMGR->stage == 2 && hp == 0)
+	else if (VMGR->stage == 2 && hp <= 0)
 	{
+		hp = 3;
 		SCENE->Set("stage2_fail");
-		hp = 3;
 	}
-	else if (VMGR->stage == 3 && hp == 0)
+	else if (VMGR->stage == 3 && hp <= 0)
 	{
-		SCENE->Set("stage3_fail");
 		hp = 3;
+		SCENE->Set("stage3_fail");
 	}
 
 	main_col->Set(pos, 40, 40);

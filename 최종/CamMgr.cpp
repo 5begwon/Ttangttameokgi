@@ -20,6 +20,7 @@ void CamMgr::Update()
 
 void CamMgr::Reset()
 {
+	rot = 0;
 	pos = CENTER;
 	size = { WINX,WINY };
 	scale = { 1,1,1 };

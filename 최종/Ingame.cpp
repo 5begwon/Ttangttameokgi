@@ -26,14 +26,14 @@ void Ingame::Init()
 		score = 0; // 점수 초기화
 		break;
 	case 2:
-		VMGR->stage = 2;
 		Player::coloring_per = 0;
+		VMGR->stage = 2;
 		enemy_count = 5;
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
 		break;
 	case 3:
-		VMGR->stage = 3;
 		Player::coloring_per = 0;
+		VMGR->stage = 3;
 		enemy_count = 10;
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
 		break;
@@ -53,12 +53,18 @@ void Ingame::Update()
 		{
 		case 1:
 			SCENE->Set("stage1_clear");
+			Player::coloring_per = 0;
+			isReady = false;
 			break;
 		case 2:
 			SCENE->Set("stage2_clear");
+			Player::coloring_per = 0;
+			isReady = false;
 			break;
 		case 3:
 			SCENE->Set("stage3_clear");
+			Player::coloring_per = 0;
+			isReady = false;
 			break;
 		}
 	}
