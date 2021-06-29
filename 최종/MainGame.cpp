@@ -91,6 +91,7 @@ void MainGame::AddResource()
 	IMG->Add("Main", "Main");
 	IMG->Add("after_bg1", "after_bg1");
 	IMG->Add("before_bg1", "before_bg1");
+	IMG->Add("before1", "before_bg1");
 	IMG->Add("delayimg", "delayimg");
 	IMG->Add("clear", "clear");
 }

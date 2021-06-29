@@ -23,7 +23,7 @@ public:
     Window* option_window;
     Window* howtoplay_window;
 
-    int alpha;
+    float alpha;
 
     // 1 : Intro, 2 : Title, 3 : Stage
     int type = 1;

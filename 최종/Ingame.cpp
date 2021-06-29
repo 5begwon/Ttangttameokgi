@@ -81,7 +81,7 @@ void Ingame::Render()
 	switch (type)
 	{
 		case 1:
-			tempbg = IMG->Find("before_bg1");
+			tempbg = IMG->Find("before1");
 			Start  = IMG->Find("delayimg");
 			tempbg->Render();
 			Start->Render();

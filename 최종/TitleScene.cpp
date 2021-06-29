@@ -8,7 +8,7 @@ TitleScene::TitleScene(int type)
 
 void TitleScene::Init()
 {
-	alpha = 255;
+	alpha = 255.0f;
 	OBJ->Add(new Mouse, "Mouse");
 
 	white  = IMG->Find("white");
@@ -99,10 +99,10 @@ void TitleScene::Update()
 		case 1:
 		if (wait->IsStop())
 		{
-			alpha = alpha < 0 ? 0 : alpha - 1;
+			alpha = alpha < 0 ? 0 : alpha - 1.5f;
 			wait->Start();
 		}
-		if (alpha == 0 || INPUT->AnyDown()) SCENE->Set("Title");
+		if (alpha <= 0 ) SCENE->Set("Title");
 		break;
 		case 2:
 
@@ -118,7 +118,7 @@ void TitleScene::Render()
 	{
 		case 1:
 			white->Render();
-			logo->Render(CENTER, RT_ZERO, V2(1, 1), 0, 1, D3DCOLOR_RGBA(255, 255, 255, alpha), true);
+			logo->Render(CENTER, RT_ZERO, V2(1, 1), 0, 1, D3DCOLOR_RGBA(255, 255, 255, (int)alpha), true);
 		break;
 		case 2:
 			bg->Render(CENTER, RT_ZERO, V2(1, 1), 0, 1, D3DCOLOR_RGBA(255, 255, 255, 255), true);
