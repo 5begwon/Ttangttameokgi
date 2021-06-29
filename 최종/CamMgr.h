@@ -10,6 +10,10 @@ public:
 	void Update();
 	void Reset();
 	void Apply();
+	void Shake(float time, float force);
+
+	Timer* shake_timer;
+	float shake_force;
 
 	float rot;
 	M pro, view;

@@ -10,6 +10,7 @@ Ingame::Ingame(int type)
 
 void Ingame::Init()
 {
+	CAM->Apply();
 	type = VMGR->stage;
 
 	if (!isReady)
@@ -23,7 +24,7 @@ void Ingame::Init()
 		Player::coloring_per = 0; // 퍼센트 초기화
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER; // 보스 생성
 		enemy_count = 3;
-		score = 0; // 점수 초기화
+		score = 0; // 점수 초기화 
 		break;
 	case 2:
 		Player::coloring_per = 0;

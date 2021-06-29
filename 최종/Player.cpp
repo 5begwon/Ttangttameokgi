@@ -32,7 +32,7 @@ void Player::Init()
 	during = TIME->Create(2);
 
 	// 플레이어 스탯
-	speed = 1;
+	speed = 4;
 	rot = 0;
 	hp = 3;
 	def = 0;
@@ -140,7 +140,7 @@ void Player::Update()
 void Player::Render()
 {
 	main_col->Draw();
-	rb->Render({CENTER.x, CENTER.y - 320}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 195));
+	rb->Render({CENTER.x, CENTER.y - 320}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 255));
 	afterbg->Render();
 	beforebg->Render(CENTER, RT_ZERO, ONE, 0, 1, D3DCOLOR_RGBA(255, 255, 255, 255));
 	V2 dir;
@@ -191,6 +191,8 @@ void Player::Enter(Col* p)
 			hp--;
 			pos = start;
 			DrawArea(2);
+			CAM->Shake(0.1f, 3);
+			CAM->pos = CENTER;
 		}
 		break;
 		case ITEM:
@@ -350,7 +352,7 @@ int Player::FloodFill(V2 pos, int target, int change)
 	if (change == 3)
 		add = true;
 
-	cell[int(pos.x)][int(pos.x)] = change;
+	cell[int(pos.x)][int(pos.y)] = change;
 	if (add) temp++;
 
 	v2q.push(pos);
