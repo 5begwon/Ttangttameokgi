@@ -9,6 +9,8 @@ struct Sound
 	void Play(bool loop);
 	void Copy();
 	void Stop();
+	Sound* SetVolume(LONG volume);
+	Sound* SetPan(LONG pan);
 };
 class SoundMgr :
 	public st<SoundMgr>
@@ -23,6 +25,8 @@ public:
 	void Play(Sound* p, bool loop);
 	void Copy(Sound* p);
 	void Stop(Sound* p);
+	Sound* SetVolume(Sound* p, LONG volume);
+	Sound* SetPan(Sound* p, LONG pan);
 
 	map<string, Sound*> sounds;
 	CSoundManager* mgr;

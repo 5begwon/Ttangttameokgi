@@ -1,6 +1,18 @@
 #include "DXUT.h"
 #include "SoundMgr.h"
 
+Sound* Sound::SetVolume(LONG volume)
+{
+    SOUND->SetVolume(this, volume);
+    return this;
+}
+
+Sound* Sound::SetPan(LONG pan)
+{
+    SOUND->SetPan(this, pan);
+    return this;
+}
+
 void Sound::Play(bool loop)
 {
     SOUND->Play(this, loop);
@@ -38,7 +50,7 @@ Sound* SoundMgr::Add(const string& key, const wstring& path)
         wchar_t wstr[256];
         swprintf(wstr, L"./Resource/sound/%s.wav", path.c_str());
         CSound* cs;
-        mgr->Create(&cs, wstr);
+        mgr->Create(&cs, wstr, DSBCAPS_CTRLPAN | DSBCAPS_CTRLVOLUME);
         Sound* s = new Sound(cs);
         sounds[key] = s;
         return s;
@@ -75,4 +87,18 @@ void SoundMgr::Stop(Sound* p)
 {
     if (p)
         p->p->Stop();
+}
+
+Sound* SoundMgr::SetVolume(Sound* p, LONG volume)
+{
+    if (p)
+        p->p->GetBuffer(0)->SetVolume(volume);
+    return p;
+}
+
+Sound* SoundMgr::SetPan(Sound* p, LONG pan)
+{
+    if (p)
+        p->p->GetBuffer(0)->SetPan(pan);
+    return p;
 }
