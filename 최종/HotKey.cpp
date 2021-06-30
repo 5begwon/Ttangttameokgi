@@ -49,19 +49,20 @@ void HotKey::F3()
 
 void HotKey::F4()
 {
-	SCENE->Set("Title");
+	SCENE->Set("stage1");
 }
 
 void HotKey::F5()
 {
-	SCENE->Set("stage1");
+	SCENE->Set("stage2");
 }
 
 void HotKey::F6()
 {
-	SCENE->Set("stage2");
+	SCENE->Set("stage3");
 }
 
 void HotKey::F7()
 {
+	
 }
