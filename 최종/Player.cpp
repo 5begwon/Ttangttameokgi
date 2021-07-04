@@ -4,8 +4,15 @@
 int	  Player::cell[CELLSIZE_X][CELLSIZE_Y] = { 0, };
 float Player::coloring_per = 0;
 
+Player::Player(int type)
+	:type(type)
+{
+}
+
 void Player::Init()
 {
+	type = VMGR->stage;
+
 	beforebg = IMG->ReLoad("before_bg1");
 	afterbg  = IMG->Find("after_bg1");
 	boss	 = OBJ->Find("boss");
@@ -31,32 +38,50 @@ void Player::Init()
 	main_col = new Col(this, P);
 	during = TIME->Create(2);
 
-	// 플레이어 스탯
-	speed = 4;
 	rot = 0;
-	hp = 3;
 	def = 0;
 	draw_mode = false;
 	no_damage = false;
+
+	// 플레이어 스탯
+	switch (type)
+	{
+		case 1:
+		speed = 3;
+		hp = 3;
+		break;
+		case 2:
+		speed = 2.5f;
+		hp = 3;
+		break;
+		case 3:
+		speed = 2;
+		hp = 3;
+		break;
+	}
 }
 
 void Player::Update()
 {
-	if (VMGR->stage == 1 && hp <= 0)
+	if (hp <= 0)
 	{
-		hp = 3;
-		SCENE->Set("stage1_fail");
-		
-	}
-	else if (VMGR->stage == 2 && hp <= 0)
-	{
-		hp = 3;
-		SCENE->Set("stage2_fail");
-	}
-	else if (VMGR->stage == 3 && hp <= 0)
-	{
-		hp = 3;
-		SCENE->Set("stage3_fail");
+		switch (type)
+		{
+			case 1:
+			VMGR->isWin = false;
+			SCENE->Set("stage1_fail");
+			break;
+
+			case 2:
+			VMGR->isWin = false;
+			SCENE->Set("stage2_fail");
+			break;
+
+			case 3:
+			VMGR->isWin = false;
+			SCENE->Set("stage3_fail");
+			break;
+		}
 	}
 
 	main_col->Set(pos, 40, 40);

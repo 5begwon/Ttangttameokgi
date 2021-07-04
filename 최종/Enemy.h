@@ -7,6 +7,8 @@ public:
     Enemy(int type);
 
     vector<Effect*> fxs;
+    vector<Texture*> b_ani;
+
     Texture* img;
     Timer* timer;
     Timer* during;
@@ -20,14 +22,16 @@ public:
 
     vector<V2> sizes = vector<V2>
     {
-        {12.65f, 12.65f}, // 보스 사이즈
-        {22, 22},         // 몹 사이즈
+        {8, 8},         // 몹 사이즈
+        {18, 18}, // 보스 사이즈
     };
 
     vector<float> speeds = vector<float>
     {
-        1.5f,   // 보스 스피드
+        3.0f,   // 몹 스피드
+        2.5f,   // 몹 스피드
         2.0f,   // 몹 스피드
+        1.5f,   // 보스 스피드
     };
 
     void Flash();

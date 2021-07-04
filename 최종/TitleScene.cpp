@@ -41,7 +41,7 @@ void TitleScene::Init()
 				300,
 				52,
 				1,
-				[&]()->void {SCENE->Set("Stage"); }
+				[&]()->void { SCENE->Set("Stage"); }
 			);
 			option = new Button
 			(
@@ -51,7 +51,7 @@ void TitleScene::Init()
 				188,
 				52,
 				1,
-				[&]()->void {option_window->On(); }
+				[&]()->void { option_window->On(); }
 			);
 			option_window	 = new Window(IMG->Find("option_window"), CENTER, 400, 600);
 			howtoplay_window = new Window(IMG->Find("howtoplay_window"), CENTER, 600, 600);
@@ -89,7 +89,6 @@ void TitleScene::Init()
 		);
 		break;
 	}
-	
 }
 
 void TitleScene::Update()

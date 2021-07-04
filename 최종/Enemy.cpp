@@ -53,17 +53,17 @@ void Enemy::Init()
 		case 2:
 		cool = 5;
 		size = sizes[0];
-		speed = speeds[0];
+		speed = speeds[1];
 		break;
 		case 3:
 		cool = 5;
 		size = sizes[0];
-		speed = speeds[0];
+		speed = speeds[2];
 		break;
 		case 4:
 		cool = 10;
 		size = sizes[1];
-		speed = speeds[1];
+		speed = speeds[3];
 		break;
 	}
 

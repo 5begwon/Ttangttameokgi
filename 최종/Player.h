@@ -48,6 +48,9 @@ public:
 
     bool draw_mode = false;
     bool no_damage = false;
+    int type = 1;
+
+    Player(int type);
 
     void SetUp();
 

@@ -1,8 +1,6 @@
 #include "DXUT.h"
 #include "Ingame.h"
 
-extern int score; // 다른 파일에서 score를 받아온다.
-
 Ingame::Ingame(int type)
 	: type(type) // 초기화
 {
@@ -21,29 +19,32 @@ void Ingame::Init()
 	switch (type) // type에 따른 스테이지 설정
 	{
 	case 1:
-		Player::coloring_per = 0; // 퍼센트 초기화
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER; // 보스 생성
 		enemy_count = 3;
-		score = 0; // 점수 초기화 
+		OBJ->Add(new Player(1), "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
+
+		for (size_t i = 0; i < enemy_count; i++)
+			OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 		break;
 	case 2:
-		Player::coloring_per = 0;
 		VMGR->stage = 2;
 		enemy_count = 5;
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
+		OBJ->Add(new Player(2), "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
+
+		for (size_t i = 0; i < enemy_count; i++)
+			OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 		break;
 	case 3:
-		Player::coloring_per = 0;
 		VMGR->stage = 3;
 		enemy_count = 10;
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
+		OBJ->Add(new Player(3), "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
+
+		for (size_t i = 0; i < enemy_count; i++)
+			OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 		break;
 	}
-	OBJ->Add(new Player, "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
-
-	for (size_t i = 0; i < enemy_count; i++)
-		OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
-	//OBJ->Add(new Enemy(RANDOM->INT(type * 3 - 2, type * 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 }
 
 void Ingame::Update()
@@ -53,18 +54,21 @@ void Ingame::Update()
 		switch (type)
 		{
 		case 1:
-			SCENE->Set("stage1_clear");
+			VMGR->isWin = true;
 			Player::coloring_per = 0;
+			SCENE->Set("stage1_clear");
 			isReady = false;
 			break;
 		case 2:
-			SCENE->Set("stage2_clear");
+			VMGR->isWin = true;
 			Player::coloring_per = 0;
+			SCENE->Set("stage2_clear");
 			isReady = false;
 			break;
 		case 3:
-			SCENE->Set("stage3_clear");
+			VMGR->isWin = true;
 			Player::coloring_per = 0;
+			SCENE->Set("stage3_clear");
 			isReady = false;
 			break;
 		}

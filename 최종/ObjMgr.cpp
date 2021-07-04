@@ -119,8 +119,8 @@ void ObjMgr::Clear()
 
 bool ObjMgr::MapOut(Obj* p)
 {
-	//if (p)
-	//	return (p->pos.x < 0 || p->pos.x > WINX ||
-	//		p->pos.y < 0 || p->pos.y > WINY);
+	if (p)
+		return (p->pos.x < 0 || p->pos.x > WINX ||
+			p->pos.y < 0 || p->pos.y > WINY);
 	return false;
 }

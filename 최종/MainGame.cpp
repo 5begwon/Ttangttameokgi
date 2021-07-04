@@ -94,4 +94,5 @@ void MainGame::AddResource()
 	IMG->Add("before1", "before_bg1");
 	IMG->Add("delayimg", "delayimg");
 	IMG->Add("clear", "clear");
+	IMG->Add("credit", "credit");
 }

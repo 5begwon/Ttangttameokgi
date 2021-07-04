@@ -9,58 +9,91 @@ End::End(int type, bool isWin)
 void End::Init()
 {
 	OBJ->Add(new Mouse, "Mouse");    
-
-	next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "", 440, 200, 1, [&]()->void { SCENE->Set("stage1"); });
-	main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "", 440, 200, 1, [&]()->void { SCENE->Set("Title");  });
-
 	stage_c = IMG->Find("clear");
+
+	type = VMGR->stage;
+	isWin = VMGR->isWin;
+
+	switch (type)
+	{
+		case 1:
+		if(isWin == true)
+		{
+			next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "Next", 440, 200, 1, [&]()->void { SCENE->Set("stage2"), VMGR->stage = 2; });
+			main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "Title", 440, 200, 1, [&]()->void { SCENE->Set("Title");  }); 
+		}
+		if (isWin == false)
+		{
+			next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "Restart", 440, 200, 1, [&]()->void { SCENE->Set("stage1"), VMGR->stage = 1; });
+			main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "Title", 440, 200, 1, [&]()->void { SCENE->Set("Title");  });
+		}
+		break;
+		case 2:
+		if (isWin == true)
+		{
+			next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "Next", 440, 200, 1, [&]()->void { SCENE->Set("stage3"), VMGR->stage = 3; });
+			main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "Title", 440, 200, 1, [&]()->void { SCENE->Set("Title");  });
+		}
+		if (isWin == false)
+		{
+			next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "Restart", 440, 200, 1, [&]()->void { SCENE->Set("stage2"), VMGR->stage = 2; });
+			main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "Title", 440, 200, 1, [&]()->void { SCENE->Set("Title");  });
+		}
+		break;
+		case 3:
+		if (isWin == false)
+		{
+			next = new Button(IMG->Find("BigBlue"), { CENTER.x - 300, CENTER.y + 300 }, "Restart", 440, 200, 1, [&]()->void { SCENE->Set("stage3"), VMGR->stage = 3; });
+			main = new Button(IMG->Find("BigBlue"), { CENTER.x + 300, CENTER.y + 300 }, "Title", 440, 200, 1, [&]()->void { SCENE->Set("Title");  });
+		}
+		break;
+	}
 }
 
 void End::Update()
 {
-	switch (type)
-	{
-		case 1:
-		stage_c = IMG->Find("clear");
-		break;
-		case 2:
-		stage_c = IMG->Find("Main");
-		break;
-		case 3:
-		stage_c = IMG->Find("white");
-		break;
-	}
 }
 
 void End::Render()
 {
-	if (type == 1 && isWin == true)
+	switch (type)
 	{
-		stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
-		IMG->Write("Congratulations on Clear!");
-	}
-	else if (type == 1 && isWin == false)
-	{
-		stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
-		IMG->Write("I wish you success next time...");
-	}
-
-	if (type == 2 && isWin == true)
-	{
-		IMG->Write("Congratulations on Clear!");
-	}
-	else if (type == 2 && isWin == false)
-	{
-		IMG->Write("I wish you success next time...");
-	}
-
-	if (type == 3 && isWin == true)
-	{
-		IMG->Write("Congratulations on Clear!");
-	}
-	else if (type == 3 && isWin == false)
-	{
-		IMG->Write("I wish you success next time...");
+		case 1:
+		if (isWin == true)
+		{
+			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
+			IMG->Write("Congratulations on Stage 1 Clear!");
+		}
+		if (isWin == false)
+		{
+			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
+			IMG->Write("I wish you Stage 1 success next time...");
+		}
+		break;
+		case 2:
+		if (isWin == true)
+		{
+			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
+			IMG->Write("Congratulations on Stage 2 Clear!");
+		}
+		if (isWin == false)
+		{
+			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
+			IMG->Write("I wish you Stage 2 success next time...");
+		}
+		break;
+		case 3:
+		if (isWin == true)
+		{
+			IMG->Find("credit")->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
+			IMG->Write("Congratulations on Stage 3 Clear!");
+		}
+		if (isWin == false)
+		{
+			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
+			IMG->Write("I wish you Stage 3 success next time...");
+		}
+		break;
 	}
 }
 
