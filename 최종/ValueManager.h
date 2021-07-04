@@ -7,7 +7,7 @@ public:
     float time_scale = 1;
     int stage = 1;
     bool isWin = false;
-
+    int hp = 3;
 };
 
 #define VMGR ValueManager::G()

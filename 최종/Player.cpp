@@ -12,6 +12,8 @@ Player::Player(int type)
 void Player::Init()
 {
 	type = VMGR->stage;
+	VMGR->hp = hp;
+
 
 	beforebg = IMG->ReLoad("before_bg1");
 	afterbg  = IMG->Find("after_bg1");

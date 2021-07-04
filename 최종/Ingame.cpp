@@ -10,7 +10,7 @@ void Ingame::Init()
 {
 	CAM->Apply();
 	type = VMGR->stage;
-
+	
 	if (!isReady)
 		return;
 
@@ -55,21 +55,21 @@ void Ingame::Update()
 		{
 		case 1:
 			VMGR->isWin = true;
+			isReady = false;
 			Player::coloring_per = 0;
 			SCENE->Set("stage1_clear");
-			isReady = false;
 			break;
 		case 2:
 			VMGR->isWin = true;
+			isReady = false;
 			Player::coloring_per = 0;
 			SCENE->Set("stage2_clear");
-			isReady = false;
 			break;
 		case 3:
 			VMGR->isWin = true;
+			isReady = false;
 			Player::coloring_per = 0;
 			SCENE->Set("stage3_clear");
-			isReady = false;
 			break;
 		}
 	}
@@ -92,13 +92,13 @@ void Ingame::Render()
 			Start->Render();
 		break;
 		case 2:
-			tempbg = IMG->Find("Main");
+			tempbg = IMG->Find("before1");
 			Start  = IMG->Find("delayimg");
 			tempbg->Render();
 			Start->Render();
 		break;
 		case 3:
-			tempbg = IMG->Find("before_bg1");
+			tempbg = IMG->Find("before1");
 			Start  = IMG->Find("delayimg");
 			tempbg->Render();
 			Start->Render();

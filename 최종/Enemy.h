@@ -11,6 +11,7 @@ public:
 
     Texture* img;
     Timer* timer;
+    Timer* delay;
     Timer* during;
     V2 size;
     V2 dir;

@@ -32,6 +32,22 @@ void Enemy::Shot(int shots)
 
 void Enemy::Init()
 {
+	b_ani = vector<Texture*>
+	{
+		IMG->Add("boss1", "boss1"),
+		IMG->Add("boss2", "boss2"),
+		IMG->Add("boss3", "boss3"),
+		IMG->Add("boss4", "boss4"),
+		IMG->Add("boss5", "boss5"),
+		IMG->Add("boss6", "boss6"),
+		IMG->Add("boss7", "boss7"),
+		IMG->Add("boss8", "boss8"),
+		IMG->Add("boss9", "boss9"),
+		IMG->Add("boss10", "boss10"),
+		IMG->Add("boss11", "boss11"),
+		IMG->Add("boss12", "boss12"),
+	};
+	
 	dir = RANDOM->Vec2(pos);
 	char str[256];
 	sprintf(str, "enemy%d", type);
