@@ -14,7 +14,6 @@ void Player::Init()
 	type = VMGR->stage;
 	VMGR->hp = hp;
 
-
 	beforebg = IMG->ReLoad("before_bg1");
 	afterbg  = IMG->Find("after_bg1");
 	boss	 = OBJ->Find("boss");
@@ -44,6 +43,17 @@ void Player::Init()
 	def = 0;
 	draw_mode = false;
 	no_damage = false;
+
+	p_button = new Button
+	(
+		IMG->Find("pause_button"),
+		{ WINX - 150, 150 },
+		"",
+		128,
+		128,
+		0.4f,
+		[&]()->void { VMGR->time_scale = VMGR->time_scale == 1 ? 0 : 1, this->p_button->depth = 0; }
+	);
 
 	// 플레이어 스탯
 	switch (type)
@@ -82,6 +92,30 @@ void Player::Update()
 			case 3:
 			VMGR->isWin = false;
 			SCENE->Set("stage3_fail");
+			break;
+		}
+	}
+
+	if (coloring_per >= 80)
+	{
+		switch (type)
+		{
+			case 1:
+			VMGR->isWin = true;
+			VMGR->isReady = false;
+			SCENE->Set("stage1_clear");
+			break;
+			case 2:
+			VMGR->isWin = true;
+			VMGR->isReady = false;
+			coloring_per = 0;
+			SCENE->Set("stage2_clear");
+			break;
+			case 3:
+			VMGR->isWin = true;
+			VMGR->isReady = false;
+			coloring_per = 0;
+			SCENE->Set("stage3_clear");
 			break;
 		}
 	}
@@ -150,9 +184,6 @@ void Player::Update()
 		}
 	}
 
-	// SHIFT == pause
-	if (INPUT->Down(VK_SHIFT)) VMGR->time_scale = VMGR->time_scale == 1 ? 0 : 1;
-
 	if (VMGR->time_scale == 0) Pause = true;
 	if (VMGR->time_scale == 1) Pause = false;
 
@@ -167,7 +198,7 @@ void Player::Update()
 void Player::Render()
 {
 	main_col->Draw();
-	rb->Render({CENTER.x, CENTER.y - 320}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 255));
+	rb->Render({CENTER.x, CENTER.y - 330}, RT_ZERO, ONE, 0, 0.5f, D3DCOLOR_RGBA(255, 255, 255, 255));
 	afterbg->Render();
 	beforebg->Render(CENTER, RT_ZERO, ONE, 0, 1, D3DCOLOR_RGBA(255, 255, 255, 255));
 	V2 dir;
@@ -192,9 +223,9 @@ void Player::Render()
 	sprintf(str1, "%02d%%", (int)coloring_per);
 	IMG->Write(str1, { CENTER.x, CENTER.y - 380 }, 120);
 	//sprintf(str1, "hp : %d", hp);
-	//IMG->Write(str1, { CENTER.x - 500, CENTER.y - 100 }, 70);
-	sprintf(str1, "speed : %.2f", (double)speed);
-	IMG->Write(str1, { CENTER.x - 500, CENTER.y }, 70);
+	////IMG->Write(str1, { CENTER.x - 500, CENTER.y - 100 }, 70);
+	//sprintf(str1, "speed : %.2f", (double)speed);
+	//IMG->Write(str1, { CENTER.x - 500, CENTER.y }, 70);
 	//sprintf(str1, "def : %d", def); 아마도 무기 장착 뜰것같음
 	//IMG->Write(str1, { pos.x - 425 - 15,pos.y - 200 + 160 }, 10);
 	
@@ -421,7 +452,7 @@ int Player::FloodFill(V2 pos, int target, int change)
 	draw_mode = true;
 	DrawArea(1);
 
-	AddItem();
+	//AddItem();
 
 	coloring_cells += temp;
 

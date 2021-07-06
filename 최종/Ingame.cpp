@@ -10,6 +10,7 @@ void Ingame::Init()
 {
 	CAM->Apply();
 	type = VMGR->stage;
+	isReady = VMGR->isReady;
 	
 	if (!isReady)
 		return;
@@ -23,8 +24,8 @@ void Ingame::Init()
 		enemy_count = 3;
 		OBJ->Add(new Player(1), "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
 
-		for (size_t i = 0; i < enemy_count; i++)
-			OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
+		for (size_t i = 1; i <= enemy_count; i++)
+			OBJ->Add(new Enemy(i), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 		break;
 	case 2:
 		VMGR->stage = 2;
@@ -32,7 +33,7 @@ void Ingame::Init()
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
 		OBJ->Add(new Player(2), "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
 
-		for (size_t i = 0; i < enemy_count; i++)
+		for (size_t i = 1; i <= enemy_count; i++)
 			OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 		break;
 	case 3:
@@ -41,7 +42,7 @@ void Ingame::Init()
 		OBJ->Add(new Enemy(4), "boss")->pos = CENTER;
 		OBJ->Add(new Player(3), "player")->pos = { CENTER.x, float(B) }; // 플레이어 생성
 
-		for (size_t i = 0; i < enemy_count; i++)
+		for (size_t i = 1; i <= enemy_count; i++)
 			OBJ->Add(new Enemy(RANDOM->INT(1, 3)), "Enemy")->pos = { float(RANDOM->INT(L + 1, R - 1)), float(RANDOM->INT(T + 1, B - 1)) };
 		break;
 	}
@@ -49,36 +50,13 @@ void Ingame::Init()
 
 void Ingame::Update()
 {
-	if (Player::coloring_per >= 80)
-	{
-		switch (type)
-		{
-		case 1:
-			VMGR->isWin = true;
-			isReady = false;
-			SCENE->Set("stage1_clear");
-			break;
-		case 2:
-			VMGR->isWin = true;
-			isReady = false;
-			Player::coloring_per = 0;
-			SCENE->Set("stage2_clear");
-			break;
-		case 3:
-			VMGR->isWin = true;
-			isReady = false;
-			Player::coloring_per = 0;
-			SCENE->Set("stage3_clear");
-			break;
-		}
-	}
 }
 
 void Ingame::Render()
 {
 	if (INPUT->AnyDown() && !isReady)
 	{
-		isReady = true;
+		VMGR->isReady = true;
 		Init();
 	}
 	

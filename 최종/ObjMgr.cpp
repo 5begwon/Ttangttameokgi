@@ -32,7 +32,7 @@ void ObjMgr::Update()
 	for (auto& i = l_obj.begin(); i != l_obj.end(); ++i)
 	{
 		Obj* obj = (*i);
-		if (obj->flag || MapOut(obj))
+		if (obj->flag/* || MapOut(obj)*/)
 		{
 			obj->Release();
 			SAFE_DELETE(obj);
@@ -120,7 +120,7 @@ void ObjMgr::Clear()
 bool ObjMgr::MapOut(Obj* p)
 {
 	if (p)
-		return (p->pos.x < 0 || p->pos.x > WINX ||
-			p->pos.y < 0 || p->pos.y > WINY);
+		return (p->pos.x < -10 || p->pos.x > WINX + 10 ||
+			p->pos.y < -10 || p->pos.y > WINY + 10);
 	return false;
 }

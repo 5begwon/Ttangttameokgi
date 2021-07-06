@@ -11,7 +11,7 @@ Button::Button(Texture* bg, V2 pos, const string& text, float w, float h, float 
 
 	OBJ->Add(this, "Button");
 }
-/*마우스 갖ㄷ자 댔을때 - 색 생김
+/*마우스 갖다 댔을때 - 색 생김
 눌렀을떄 - 어둡고 작아짐
 아무것도 안했을떄  (커서가 위에 올라가 있는것도 안됨 ) - 지금 리소스 (하양*/
 void Button::On()

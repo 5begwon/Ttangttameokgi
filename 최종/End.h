@@ -6,6 +6,8 @@ class End :
 public:
     End(int type, bool isWin);
 
+    Texture* bg_c;
+    Texture* bg_f;
     Texture* stage_c;
     Texture* stage_f;
 

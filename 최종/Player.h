@@ -13,6 +13,8 @@ public:
     Texture* pause;
     Texture* rb;
     Texture* hpimg;
+    
+    Button* p_button;
 
     Timer* during;
 

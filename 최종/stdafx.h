@@ -28,6 +28,7 @@ const int B = CENTER.y + CELLSIZE_Y / 2;
 const V2 gap = { (WINX - CELLSIZE_X) / 2, (WINY - CELLSIZE_Y) / 2 };
 
 const RECT RT_ZERO = { 0,0,0,0 };
+const D3DXCOLOR MAX = D3DXCOLOR(1, 1, 1, 1);
 
 static bool WIN = true;
 static int score = 0;
@@ -65,6 +66,7 @@ enum Tag
 #include "HotKey.h"
 #include "InputMgr.h"
 #include "ValueManager.h"
+#include "AnimMgr.h"
 
 //GAME
 #include "Item.h"
@@ -78,10 +80,9 @@ enum Tag
 #include "Window.h"
 
 //SCENE
-#include "Title.h"
+#include "TitleScene.h"
 #include "Ingame.h"
 #include "End.h"
-#include "TitleScene.h"
 
 //OBJ
 #include "Player.h"

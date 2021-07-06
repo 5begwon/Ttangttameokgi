@@ -32,6 +32,7 @@ void MainGame::Update()
 	SCENE->Update();
 	OBJ->Update();
 	HOT->Update();
+	ANIM->Update();
 }
 
 void MainGame::Render()
@@ -83,7 +84,6 @@ void MainGame::AddResource()
 	IMG->Add("option", "option");
 	IMG->Add("option_window", "option_window");
 	IMG->Add("howtoplay_window", "howtoplay_window");
-	IMG->Add("invisable", "invisable");
 	IMG->Add("heart", "heart");
 	IMG->Add("stage1", "stage1");
 	IMG->Add("stage2", "stage2");
@@ -92,6 +92,7 @@ void MainGame::AddResource()
 	IMG->Add("clear_next", "clear_next");
 	IMG->Add("fail_main", "fail_main");
 	IMG->Add("fail_restart", "fail_restart");
+	IMG->Add("pause_button", "pause_button");
 
 	// BG
 	IMG->Add("white", "white");

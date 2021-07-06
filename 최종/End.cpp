@@ -13,6 +13,9 @@ void End::Init()
 	stage_c = IMG->Find("clear");
 	stage_f = IMG->Find("fail");
 
+	bg_c = IMG->Find("after_bg1");
+	bg_f = IMG->Find("before1");
+
 	type = VMGR->stage;
 	isWin = VMGR->isWin;
 
@@ -22,11 +25,11 @@ void End::Init()
 		if (isWin == true)
 		{
 			next = new Button(IMG->Find("clear_next"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage2"), VMGR->stage = 2, Player::coloring_per = 0; });
-			main = new Button(IMG->Find("clear_main"), { CENTER.x + 358, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("Title");  });
+			main = new Button(IMG->Find("clear_main"), { CENTER.x + 358, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("Title"), Player::coloring_per = 0; });
 		}
 		if (isWin == false)
 		{
-			next = new Button(IMG->Find("fail_restart"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage1"), VMGR->stage = 1, Player::coloring_per = 0; });
+			next = new Button(IMG->Find("fail_restart"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage1"), VMGR->stage = 1, Player::coloring_per = 0, VMGR->isReady = false; });
 			main = new Button(IMG->Find("fail_main"),	 { CENTER.x + 358, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("Title"), Player::coloring_per = 0;  });
 		}
 		break;
@@ -38,14 +41,14 @@ void End::Init()
 		}
 		if (isWin == false)
 		{
-			next = new Button(IMG->Find("fail_restart"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage2"), VMGR->stage = 2, Player::coloring_per = 0; });
+			next = new Button(IMG->Find("fail_restart"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage2"), VMGR->stage = 2, Player::coloring_per = 0, VMGR->isReady = false; });
 			main = new Button(IMG->Find("fail_main"),	 { CENTER.x + 358, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("Title"), Player::coloring_per = 0;  });
 		}
 		break;
 		case 3:
 		if (isWin == false)
 		{
-			next = new Button(IMG->Find("fail_restart"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage3"), VMGR->stage = 3, Player::coloring_per = 0; });
+			next = new Button(IMG->Find("fail_restart"), { CENTER.x - 323, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("stage3"), VMGR->stage = 3, Player::coloring_per = 0, VMGR->isReady = false; });
 			main = new Button(IMG->Find("fail_main"),	 { CENTER.x + 358, CENTER.y + 260 }, "", 348, 162, 1, [&]()->void { SCENE->Set("Title"), Player::coloring_per = 0;  });
 		}
 		break;
@@ -63,12 +66,14 @@ void End::Render()
 		case 1:
 		if (isWin == true)
 		{
+			bg_c->Render(CENTER, RT_ZERO, { 1,1 }, 0, 1);
 			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 1);
 			sprintf(str, "%02d%", (int)Player::coloring_per);
 			IMG->Write(str, { CENTER.x - 100, CENTER.y - 10 }, 270);
 		}
 		if (isWin == false)
 		{
+			bg_f->Render(CENTER, RT_ZERO, { 1,1 }, 0, 1);
 			stage_f->Render(CENTER, RT_ZERO, ONE, 0, 1);
 			sprintf(str, "%02d%", (int)Player::coloring_per);
 			IMG->Write(str, { CENTER.x - 100, CENTER.y - 10 }, 270);
@@ -77,12 +82,14 @@ void End::Render()
 		case 2:
 		if (isWin == true)
 		{
+			bg_c->Render(CENTER, RT_ZERO, { 1,1 }, 0, 1);
 			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 1);
 			sprintf(str, "%02d%", (int)Player::coloring_per);
 			IMG->Write(str, { CENTER.x - 100, CENTER.y - 10 }, 270);
 		}
 		if (isWin == false)
 		{
+			bg_f->Render(CENTER, RT_ZERO, { 1,1 }, 0, 1);
 			stage_f->Render(CENTER, RT_ZERO, ONE, 0, 1);
 			sprintf(str, "%02d%", (int)Player::coloring_per);
 			IMG->Write(str, { CENTER.x - 100, CENTER.y - 10 }, 270);
@@ -99,6 +106,7 @@ void End::Render()
 		}
 		if (isWin == false)
 		{
+			bg_f->Render(CENTER, RT_ZERO, { 1,1 }, 0, 1);
 			stage_f->Render(CENTER, RT_ZERO, ONE, 0, 1);
 			sprintf(str, "%02d%", (int)Player::coloring_per);
 			IMG->Write(str, { CENTER.x - 100, CENTER.y - 10}, 270);

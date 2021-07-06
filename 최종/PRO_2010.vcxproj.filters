@@ -78,6 +78,9 @@
     <Filter Include="Mgr\VALUE">
       <UniqueIdentifier>{41a8ab98-ed0f-4b87-a0b6-63201c3b172b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mgr\ANI">
+      <UniqueIdentifier>{8caf0951-e1a5-473f-9d92-1abbccece708}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -212,9 +215,6 @@
     <ClCompile Include="Ingame.cpp">
       <Filter>Game\scene</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>Game\scene</Filter>
-    </ClCompile>
     <ClCompile Include="End.cpp">
       <Filter>Game\scene</Filter>
     </ClCompile>
@@ -227,8 +227,8 @@
     <ClCompile Include="ValueManager.cpp">
       <Filter>Mgr\VALUE</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>Game\obj</Filter>
+    <ClCompile Include="AnimMgr.cpp">
+      <Filter>Mgr\ANI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +308,6 @@
     <ClInclude Include="Ingame.h">
       <Filter>Game\scene</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>Game\scene</Filter>
-    </ClInclude>
     <ClInclude Include="End.h">
       <Filter>Game\scene</Filter>
     </ClInclude>
@@ -323,8 +320,8 @@
     <ClInclude Include="ValueManager.h">
       <Filter>Mgr\VALUE</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>Game\obj</Filter>
+    <ClInclude Include="AnimMgr.h">
+      <Filter>Mgr\ANI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,30 @@ Enemy::Enemy(int type)
 {
 }
 
+void Enemy::Flash()
+{
+	dir = RANDOM->Vec2(pos);
+
+	fxs.emplace_back(new Effect(img, pos, 0, 4));
+
+	pos += dir * 50;
+}
+
+void Enemy::Rush()
+{
+	during->Start();
+	char str[256];
+	sprintf(str, "enemy%d_red", type);
+	img = IMG->Add(str, str);
+}
+
+void Enemy::Shot(int shots)
+{
+	int angle = 360 / shots;
+	for (int i = 0; i < 360; i += angle)
+		OBJ->Add(new Bullet(1, { cos(D3DXToRadian(i)), sin(D3DXToRadian(i)) }), "Bullet")->pos = pos;
+}
+
 void Enemy::Init()
 {	
 	dir = RANDOM->Vec2(pos);
@@ -18,7 +42,7 @@ void Enemy::Init()
 	rot = 0;
 	spin_force = 0;
 	main_col = new Col(this, EATK);
-
+	
 	switch (type)
 	{
 		case 1:
@@ -42,17 +66,36 @@ void Enemy::Init()
 		speed = speeds[3];
 		break;
 	}
+	ANIM->Add("boss", "boss", "")->Start();
 
 	timer = TIME->Create(cool);
 	timer->Start();
-	during = TIME->Create(3);
+	during = TIME->Create(3.0f);
 }
 
 void Enemy::Update()
 {
-	for (int i = 0; i < speed * VMGR->time_scale * DT; i++)
+	for (int i = 0; i < speed * VMGR->time_scale; i++)
 	{
 		pos += dir;
+
+		if (pos.x < L)
+			RANDOM->Reflex(&dir, V2(-1, 0));
+		if (pos.x > R)
+			RANDOM->Reflex(&dir, V2(1, 0));
+		if (pos.y < T)
+			RANDOM->Reflex(&dir, V2(0, -1));
+		if (pos.y > B)
+			RANDOM->Reflex(&dir, V2(0, 1));
+
+		if (Player::cell[int(pos.x) + 1][int(pos.y)] == 2)
+			RANDOM->Reflex(&dir, V2(1, 0));
+		if (Player::cell[int(pos.x) - 1][int(pos.y)] == 2)
+			RANDOM->Reflex(&dir, V2(-1, 0));
+		if (Player::cell[int(pos.x)][int(pos.y) + 1] == 2)
+			RANDOM->Reflex(&dir, V2(0, 1));
+		if (Player::cell[int(pos.x)][int(pos.y) - 1] == 2)
+			RANDOM->Reflex(&dir, V2(0, -1));
 	}
 
 	spin_force += DT * 100;
@@ -61,34 +104,16 @@ void Enemy::Update()
 	
 	int range = 7;
 
-	switch (type)
-	{
-			//case 4:
-			//	range = 110;
-			//	if (timer->IsStop())
-			//	{
-			//		timer->Start();
-			//	}
-			//	if (during->IsStop())
-			//	{
-			//		char str[256];
-			//		sprintf(str, "enemy%d", type);
-			//		img = IMG->Add(str, str);
-			//	}
-			//	else
-			//	{
-			//		pos += dir * 10;
-			//		fxs.emplace_back(new Effect(img, pos, rot, 3));
-			//	}
-			//	break;
-			//case 4:
-			//	range = 110;
-			//	if (timer->IsStop())
-			//	{
-			//		timer->Start(); 
-			//	}
-			//	break;
-	}
+	//switch (type)
+	//{
+	//	case 4:
+	//		//range = 110;
+	//		if (timer->IsStop())
+	//		{
+	//			speed = speeds[5];
+	//			timer->Start();
+	//		}
+	//}
 
 	main_col->Set(pos, 16 * size.x, 16 * size.y);
 
@@ -100,7 +125,7 @@ void Enemy::Update()
 				dir = RANDOM->Vec2(pos);
 
 	if (Player::cell[c.x][c.y] == 3)
-		if (type < 7)
+		if (type <= 4)
 			flag = true;
 }
 
@@ -109,6 +134,14 @@ void Enemy::Render()
 	main_col->Draw();
 	for (auto& i : fxs)
 		i->Render();
+
+	switch (type)
+	{
+		case 4:
+		img = ANIM->Add("boss", "boss", "")->CurText;
+		break;
+	}
+
 	//rot += spin_force;
 	//if (rot >= 360)
 	//	rot = 0;
