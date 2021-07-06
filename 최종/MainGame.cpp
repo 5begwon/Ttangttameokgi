@@ -76,6 +76,7 @@ void MainGame::AddResource()
 	IMG->Add("logo", "logo");
 	IMG->Add("rainbow", "rainbow");
 	IMG->Add("pause", "pause");
+	IMG->Add("pause_button", "pause_button");
 	IMG->Add("button_cross", "button_cross");
 	IMG->Add("howto", "howto");
 	IMG->Add("start", "start");
@@ -87,6 +88,10 @@ void MainGame::AddResource()
 	IMG->Add("stage1", "stage1");
 	IMG->Add("stage2", "stage2");
 	IMG->Add("stage3", "stage3");
+	IMG->Add("clear_main", "clear_main");
+	IMG->Add("clear_next", "clear_next");
+	IMG->Add("fail_main", "fail_main");
+	IMG->Add("fail_restart", "fail_restart");
 
 	// BG
 	IMG->Add("white", "white");
@@ -98,4 +103,5 @@ void MainGame::AddResource()
 	IMG->Add("delayimg", "delayimg");
 	IMG->Add("clear", "clear");
 	IMG->Add("credit", "credit");
+	IMG->Add("fail", "fail");
 }
