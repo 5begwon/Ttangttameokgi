@@ -62,7 +62,8 @@ void End::Render()
 		if (isWin == true)
 		{
 			stage_c->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
-			IMG->Write("Congratulations on Stage 1 Clear!");
+			sprintf(str, "%02d%%", (int)Player::coloring_per);
+			IMG->Write(str, { CENTER.x, CENTER.y - 380 }, 120);
 		}
 		if (isWin == false)
 		{
@@ -86,7 +87,10 @@ void End::Render()
 		if (isWin == true)
 		{
 			IMG->Find("credit")->Render(CENTER, RT_ZERO, ONE, 0, 0.5f);
-			IMG->Write("Congratulations on Stage 3 Clear!");
+			if (INPUT->AnyDown())
+			{
+				SCENE->Set("Title");
+			}
 		}
 		if (isWin == false)
 		{

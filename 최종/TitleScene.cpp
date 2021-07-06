@@ -59,33 +59,44 @@ void TitleScene::Init()
 		case 3:
 		stage1 = new Button
 		(
-			IMG->Find("invisable"),
-			{ CENTER.x +  200, CENTER.y + 50 },
+			IMG->Find("stage1"),
+			{ CENTER.x + 2, CENTER.y - 106 },
 			"",
-			120,
-			120,
+			1158,
+			54,
 			1,
 			[&]()->void { SCENE->Set("stage1"), VMGR->stage = 1; }
 		);
 		stage2 = new Button
 		(
-			IMG->Find("invisable"),
-			{ CENTER.x + 200, CENTER.y + 200 },
+			IMG->Find("stage2"),
+			{ CENTER.x - 12, CENTER.y + 20 },
 			"",
-			120,
-			120,
+			822,
+			54,
 			1,
 			[&]()->void { SCENE->Set("stage2"), VMGR->stage = 2; }
 		);
 		stage3 = new Button
 		(
-			IMG->Find("invisable"),
-			{ CENTER.x + 200, CENTER.y + 350 },
+			IMG->Find("stage3"),
+			{ CENTER.x - 5, CENTER.y + 145 },
 			"",
-			120,
-			120,
+			870,
+			54,
 			1,
 			[&]()->void { SCENE->Set("stage3"), VMGR->stage = 3; }
+		);
+
+		title = new Button
+		(
+			IMG->Find("button_cross"),
+			{ CENTER.x, CENTER.y + 280 },
+			"",
+			121,
+			121,
+			1,
+			[&]()->void { SCENE->Set("Title"); }
 		);
 		break;
 	}

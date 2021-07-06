@@ -385,6 +385,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -406,6 +407,7 @@
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="ValueManager.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CamMgr.h" />

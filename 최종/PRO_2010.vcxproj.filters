@@ -227,6 +227,9 @@
     <ClCompile Include="ValueManager.cpp">
       <Filter>Mgr\VALUE</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Game\obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="ValueManager.h">
       <Filter>Mgr\VALUE</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Game\obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

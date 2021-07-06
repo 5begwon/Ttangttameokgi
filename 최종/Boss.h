@@ -1,12 +1,13 @@
 #pragma once
 #include "Obj.h"
-class Enemy :
+class Boss :
     public Obj
 {
 public:
-    Enemy(int type);
+    Boss(int type);
 
     vector<Effect*> fxs;
+    vector<Texture*> b_ani;
 
     Texture* img;
     Timer* timer;
@@ -33,6 +34,10 @@ public:
         2.0f,   // 몹 스피드
         1.5f,   // 보스 스피드
     };
+
+    void Flash();
+    void Rush();
+    void Shot(int shots);
 
     // Obj을(를) 통해 상속됨
     virtual void Init() override;

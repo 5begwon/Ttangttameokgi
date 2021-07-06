@@ -84,6 +84,9 @@ void MainGame::AddResource()
 	IMG->Add("howtoplay_window", "howtoplay_window");
 	IMG->Add("invisable", "invisable");
 	IMG->Add("heart", "heart");
+	IMG->Add("stage1", "stage1");
+	IMG->Add("stage2", "stage2");
+	IMG->Add("stage3", "stage3");
 
 	// BG
 	IMG->Add("white", "white");

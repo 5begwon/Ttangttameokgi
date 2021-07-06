@@ -15,6 +15,8 @@ public:
     int type;
     bool isWin;
 
+    char str[256];
+
     // Scene을(를) 통해 상속됨
     virtual void Init() override;
     virtual void Update() override;

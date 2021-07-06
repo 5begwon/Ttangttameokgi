@@ -19,9 +19,11 @@ public:
     Button* stage1;
     Button* stage2;
     Button* stage3;
+    Button* title;
 
     Window* option_window;
     Window* howtoplay_window;
+    Window* title_window;
 
     float alpha;
 

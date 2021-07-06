@@ -56,7 +56,6 @@ void Ingame::Update()
 		case 1:
 			VMGR->isWin = true;
 			isReady = false;
-			Player::coloring_per = 0;
 			SCENE->Set("stage1_clear");
 			break;
 		case 2:
