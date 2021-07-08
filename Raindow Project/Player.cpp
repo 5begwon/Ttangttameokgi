@@ -95,7 +95,7 @@ void Player::Init()
 	switch (type)
 	{
 		case 1:
-		speed = 230;
+		speed = 250;
 		hp = 3;
 		break;
 		case 2:

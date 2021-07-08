@@ -102,6 +102,7 @@ void End::Render()
 			IMG->Find("credit")->Render(CENTER, RT_ZERO, ONE, 0, 0.8f, D3DCOLOR_ARGB(255, 255, 255, 255), true);
 			if (INPUT->AnyDown())
 			{
+				SOUND->Add("bgmusic", L"bgmusic")->Stop();
 				SCENE->Set("Title");
 			}
 		}
